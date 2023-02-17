@@ -1,0 +1,7 @@
+/* query is to tell dbs to give exactly what piece of information you wanna collect from dbs
+*/
+CREATE TABLE STUDENT(
+STUDENT_ID INT PRIMARY KEY,
+NAME VARCHAR(20),
+PROFFF VARCHAR(20)
+);
