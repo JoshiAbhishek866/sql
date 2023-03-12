@@ -119,9 +119,10 @@ INSERT INTO works_with VALUES(105, 404, 33000);
 INSERT INTO works_with VALUES(107, 405, 26000);
 INSERT INTO works_with VALUES(102, 406, 15000);
 INSERT INTO works_with VALUES(105, 406, 130000);
+select * from employee;
+select * from employee order by salary asc;
 select * from employee order by salary desc;
-select * from employee order by sex,first_name,last_name; --here first names are ordered on basis of gender than thier first name and at last on basis of last name
-select * from employee limit 5;
-select first_name as forename,last_name as surname from employee; --to display attribute with different name
-select distinct branch_id from employee;
-select * from client;
+select * from employee order by sex,first_name,last_name; --here first names are ordered on basis of gender than thier first name and at last on basis of last name (order under an order)
+select * from employee limit 5; --TO SELECT FIRST 5 QUERY 
+select first_name as forename,last_name as surname from employee; --to display PARTICULAR  attribute with different name (HERE DIFFERENT NAME IS GIVEN FOR THAT QUERY ONLY AND WONT DISPLAYED ON MAIN TABLE)
+select distinct branch_id from employee;  --TO FIND OUT DIFFERENT IDS
