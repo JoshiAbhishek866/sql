@@ -1,2 +1,22 @@
 select COUNT(emp_id) 
-from employee;
+from employee;--to find no. of employees
+select COUNT(emp_id) 
+from employee
+where sex='F' and birth_day>'1971-01-01'; --no. of female emp born after 1970
+select AVG(salary)
+from employee
+where sex='m';  --avg of all men employee salary
+select SUM(salary)
+from employee; --sum of all salary
+ select count(sex)
+ from employee; -- this is only counting of entries or how many employees have entry in sex column
+  select count(sex),sex
+  from employee
+  group by sex; --how many female and male employee
+  --this called aggregation , meaning of aggregate is "a whole formed by combining several separate elements."
+select sum(total_sales),emp_id
+from works_with
+group by emp_id; --how much each employee has sold the product
+select sum(total_sales),client_id
+from works_with
+group by client_id; --how much each client  has taken the product
