@@ -1,0 +1,2 @@
+select COUNT(emp_id) 
+from employee;
