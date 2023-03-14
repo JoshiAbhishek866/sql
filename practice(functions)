@@ -20,3 +20,20 @@ group by emp_id; --how much each employee has sold the product
 select sum(total_sales),client_id
 from works_with
 group by client_id; --how much each client  has taken the product
+--EXTRA
+--FIND ANT CLIENT WHO ARE AN LLC
+SELECT * 
+FROM CLIENT
+WHERE CLIENT_NAME LIKE '%LLC';          -- %LLC here % defines any number of character and then name should end with LLC
+  --FIND ANT branch_suppliers WHO ARE in labeL BUSSINESS 
+SELECT * 
+FROM branch_supplier
+WHERE supplier_name LIKE '% LABEL%';    -- %LLC here % defines any number of character and then name should end with LLC
+--FIND ANY EMPLOYEE BORN IN OCTOBER 
+SELECT *
+FROM EMPLOYEE
+WHERE BIRTH_DAY LIKE '____-10%'; --HERE '_' REPRESENTS ANY RANDOM CHARACTER
+--FIND THE CLIENT WHICH ARE SCHOOLS
+SELECT *
+FROM CLIENT
+WHERE CLIENT_NAME LIKE '%SCHOOL%';
