@@ -81,3 +81,57 @@ ON employee.emp_id = branch.mgr_id;
 --thus in left join we get all rows from left join 
 --in right join we get all the rows from right table
 --a FULL OUTER JOIN is equal to left join plus right join no matter if they meet the conditions (here for instance condition is empid=mgrid )
+--example of SIMPLE QUERIES
+SELECT works_with.emp_id
+FROM works_with
+WHERE works_with.total_sales > 50000; --THESE QUERY WILL GIVE EMPID WHO SOLD ITEM WORTH MORE THAN 50,000
+--example of NESTED QUERIES
+-- Find names of all employees who have sold over or more than  50,000 
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN (SELECT works_with.emp_id
+FROM works_with
+WHERE works_with.total_sales > 50000);  --NOT ONLY THESE QUERY WILL GIVE EMPID  OF PERSON WHO HAS SOLD ITEM MORE THAN 50,000...
+---BUT IT WILL TELL ITS FIRST NAME AND LAST NAME OF THAN EMPID
+--HENCE 'IN' KEYWORD IS USED FOR NESTED QUERY
+
+-- Find all clients who are handles by the branch that Michael Scott manages
+-- Assume you know Michael's ID
+SELECT client.client_id, client.client_name
+FROM client
+WHERE client.branch_id = (SELECT branch.branch_id
+                          FROM branch--THIS QUERY WILL GIVE BRANCHID , IT WILL BE EXECUTED FIRST 
+                          WHERE branch.mgr_id = 102
+                          LIMIT 1 --IT WILL MAKE SURE THAT ONLY ONE VALVE CAN BE GIVEN TO FINAL QUERY
+                          );  
+--FROM BRANCH ID FINALLY THEY WILL SELECT CLIENT NAME 
+
+ -- Find all clients who are handles by the branch that Michael Scott manages
+ -- Assume you DONT'T know Michael's ID
+ SELECT client.client_id, client.client_name
+ FROM client
+ WHERE client.branch_id = (SELECT branch.branch_id
+                           FROM branch
+                           WHERE branch.mgr_id = (SELECT employee.emp_id
+                                                  FROM employee
+                                                  WHERE employee.first_name = 'Michael' AND employee.last_name ='Scott'
+                                                  LIMIT 1 ));
+-- Find the names of employees who work with clients handled by the scranton branch
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN (
+                         SELECT works_with.emp_id
+                         FROM works_with
+                         )
+AND employee.branch_id = 2;
+-- Find the names of all clients who have spent more than 100,000 dollars
+SELECT client.client_name
+FROM client
+WHERE client.client_id IN (
+                          SELECT client_id
+                          FROM (
+                                SELECT SUM(works_with.total_sales) AS totals, client_id
+                                FROM works_with
+                                GROUP BY client_id) AS total_client_sales
+                          WHERE totals > 100000
+);
